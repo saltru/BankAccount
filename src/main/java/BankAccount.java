@@ -1,11 +1,11 @@
 import java.util.Calendar;
 import java.util.Date;
 
-public class BankAccount {
-    private String name;
-    private Date dateOfCreation;
-    private String accountNumber;
-    private double moneyAmount;
+public abstract class BankAccount implements ICashable {
+    protected String name;
+    protected Date dateOfCreation;
+    protected String accountNumber;
+    protected double moneyAmount;
 
     BankAccount() {
         this.name = "UNKNOWN";
@@ -45,28 +45,7 @@ public class BankAccount {
         return moneyAmount;
     }
 
-    public double cashIn(double value) throws Exception {
-        if (value > 0.0) {
-            moneyAmount += value;
-        } else {
-            throw new Exception("Value must be positive!");
-        }
+    public abstract double cashIn(double value) throws Exception;
 
-        return moneyAmount;
-    }
-
-    public double cashOut(double value) throws Exception {
-        if (value > 0.0) {
-            if (moneyAmount > value) {
-                moneyAmount -= value;
-            }
-            else {
-                throw new Exception("Not enough money!");
-            }
-        } else {
-            throw new Exception("Value must be positive!");
-        }
-
-        return moneyAmount;
-    }
+    public abstract double cashOut(double value) throws Exception;
 }
